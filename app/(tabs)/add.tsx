@@ -17,7 +17,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function AddSongScreen() {
   const router = useRouter();
-  const params = useLocalSearchParams<{ draft?: string }>();
+  const params = useLocalSearchParams<{ draft?: string; edit?: string }>();
   const [title, setTitle] = useState("");
   const [artist, setArtist] = useState("");
   const [keyText, setKeyText] = useState("");
@@ -25,13 +25,32 @@ export default function AddSongScreen() {
   const [tagsText, setTagsText] = useState("");
   const [linesText, setLinesText] = useState("");
   const [saving, setSaving] = useState(false);
+  const [editingSongId, setEditingSongId] = useState<string | null>(null);
 
-  // Prefill from import draft if present
+  const isEditMode = !!params?.edit;
+
+  // Prefill from import draft or load song for editing
   const prefilledRef = useRef(false);
   useEffect(() => {
     let mounted = true;
     (async () => {
-      if (params?.draft && !prefilledRef.current) {
+      // Load song for editing
+      if (params?.edit && !prefilledRef.current) {
+        const { findAnySongById } = await import("@/lib/data/all-songs");
+        const song = await findAnySongById(params.edit);
+        if (mounted && song) {
+          setTitle(song.title);
+          setArtist(song.artist);
+          setKeyText(song.key || "");
+          setCapoText(song.capo?.toString() || "");
+          setTagsText((song.tags || []).join(", "));
+          setLinesText((song.lines || []).join("\n"));
+          setEditingSongId(song.id);
+          prefilledRef.current = true;
+        }
+      }
+      // Or prefill from import draft
+      else if (params?.draft && !prefilledRef.current) {
         const draft = await getImportDraft();
         if (mounted && draft) {
           if (!title) setTitle(draft.title);
@@ -46,11 +65,22 @@ export default function AddSongScreen() {
     return () => {
       mounted = false;
     };
-  }, [params?.draft, title, artist, keyText, linesText]);
+  }, [params?.draft, params?.edit, title, artist, keyText, linesText]);
 
   const valid = useMemo(() => {
     return title.trim().length > 0 && artist.trim().length > 0 && linesText.trim().length > 0;
   }, [title, artist, linesText]);
+
+  const hasData = useMemo(() => {
+    return (
+      title.trim().length > 0 ||
+      artist.trim().length > 0 ||
+      keyText.trim().length > 0 ||
+      capoText.trim().length > 0 ||
+      tagsText.trim().length > 0 ||
+      linesText.trim().length > 0
+    );
+  }, [title, artist, keyText, capoText, tagsText, linesText]);
 
   const bg = useThemeColor({}, "background");
   const text = useThemeColor({}, "text");
@@ -68,11 +98,32 @@ export default function AddSongScreen() {
     }
   }
 
+  function onReset() {
+    Alert.alert("Clear Form", "Are you sure you want to clear all fields?", [
+      { text: "Cancel", style: "cancel" },
+      {
+        text: "Clear",
+        style: "destructive",
+        onPress: () => {
+          setTitle("");
+          setArtist("");
+          setKeyText("");
+          setCapoText("");
+          setTagsText("");
+          setLinesText("");
+          if (isEditMode) {
+            router.back();
+          }
+        },
+      },
+    ]);
+  }
+
   async function onSave() {
     if (!valid) return;
     setSaving(true);
     try {
-      const id = makeUserSongId();
+      const id = isEditMode && editingSongId ? editingSongId : makeUserSongId();
       const tags = tagsText
         .split(",")
         .map(t => t.trim())
@@ -89,39 +140,65 @@ export default function AddSongScreen() {
         tags,
         lines,
       };
-      // Persist to AsyncStorage (existing behavior)
-      // await addUserSong(song);
 
-      // Also persist to SQLite via Drizzle
+      // Persist to SQLite via Drizzle
       try {
-        await db.insert(userSongsTable).values({
-          id: song.id,
-          title: song.title,
-          artist: song.artist,
-          key: song.key ?? (null as any),
-          capo: song.capo ?? (null as any),
-          bpm: song.bpm ?? (null as any),
-          tags: (song.tags ?? []).join(","),
-          lines: (song.lines ?? []).join("\n"),
-        } as any);
+        if (isEditMode && editingSongId) {
+          // Update existing song
+          const { eq } = await import("drizzle-orm");
+          await db
+            .update(userSongsTable)
+            .set({
+              title: song.title,
+              artist: song.artist,
+              key: song.key ?? (null as any),
+              capo: song.capo ?? (null as any),
+              bpm: song.bpm ?? (null as any),
+              tags: (song.tags ?? []).join(","),
+              lines: (song.lines ?? []).join("\n"),
+            })
+            .where(eq(userSongsTable.id, editingSongId));
+        } else {
+          // Insert new song
+          await db.insert(userSongsTable).values({
+            id: song.id,
+            title: song.title,
+            artist: song.artist,
+            key: song.key ?? (null as any),
+            capo: song.capo ?? (null as any),
+            bpm: song.bpm ?? (null as any),
+            tags: (song.tags ?? []).join(","),
+            lines: (song.lines ?? []).join("\n"),
+          } as any);
+        }
       } catch (dbErr) {
-        // Non-blocking: continue even if DB write fails
-        console.warn("DB insert failed:", dbErr);
+        console.warn("DB operation failed:", dbErr);
+        Alert.alert("Error", "Failed to save song to database.");
+        setSaving(false);
+        return;
       }
-      Alert.alert("Saved", "Your song was added to the library.", [
-        {
-          text: "View",
-          onPress: () => router.push(`/song/${song.id}` as any),
-        },
-        { text: "OK" },
-      ]);
-      // Reset form
-      setTitle("");
-      setArtist("");
-      setKeyText("");
-      setCapoText("");
-      setTagsText("");
-      setLinesText("");
+
+      Alert.alert(
+        "Saved",
+        isEditMode ? "Your song has been updated." : "Your song was added to the library.",
+        [
+          {
+            text: "View",
+            onPress: () => router.push(`/song/${song.id}` as any),
+          },
+          { text: "OK", onPress: () => router.back() },
+        ]
+      );
+
+      // Reset form only if adding (not editing)
+      if (!isEditMode) {
+        setTitle("");
+        setArtist("");
+        setKeyText("");
+        setCapoText("");
+        setTagsText("");
+        setLinesText("");
+      }
     } catch (e) {
       console.warn(e);
       Alert.alert("Error", "Failed to save song. Please try again.");
@@ -134,7 +211,7 @@ export default function AddSongScreen() {
     <ThemedView style={{ flex: 1 }}>
       <SafeAreaView style={{ flex: 1 }}>
         <ScrollView contentContainerStyle={{ padding: 16 }} keyboardShouldPersistTaps="handled">
-          <UiText variant="title">Add Song</UiText>
+          <UiText variant="title">{isEditMode ? "Edit Song" : "Add Song"}</UiText>
           <View style={{ height: 12 }} />
           <Field label="Title">
             <TextInput
@@ -202,6 +279,14 @@ export default function AddSongScreen() {
           </Field>
           <View style={{ height: 12 }} />
           <Stack direction="row" space={2}>
+            {hasData && (
+              <Button
+                title={isEditMode ? "Cancel" : "Reset"}
+                onPress={onReset}
+                variant="ghost"
+                style={{ flex: 1 }}
+              />
+            )}
             <Button
               title="Parse Chords"
               onPress={onParse}

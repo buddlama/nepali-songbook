@@ -3,8 +3,6 @@ import { SearchBar } from "@/components/search-bar";
 import { SongList } from "@/components/song-list";
 import { ThemedView } from "@/components/themed-view";
 import { UiText } from "@/components/ui/Text";
-import { db } from "@/database";
-import { usersTable } from "@/database/schema";
 import { getAllSongs } from "@/lib/data/all-songs";
 import { useFavorites } from "@/lib/storage/favorites";
 import type { Song } from "@/types/song";
@@ -17,18 +15,24 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export default function SongsScreen() {
   const router = useRouter();
   const [songs, setSongs] = useState<Song[]>([]);
+  const [refreshing, setRefreshing] = useState(false);
 
   const fetchSongs = React.useCallback(async () => {
     const all = await getAllSongs();
     setSongs(all);
   }, []);
 
+  const handleRefresh = React.useCallback(async () => {
+    setRefreshing(true);
+    try {
+      await fetchSongs();
+    } finally {
+      setRefreshing(false);
+    }
+  }, [fetchSongs]);
+
   useEffect(() => {
     let mounted = true;
-    (async () => {
-      const users_data = await db.select().from(usersTable);
-      console.log("usersTable_home:", users_data);
-    })();
     (async () => {
       const all = await getAllSongs();
       if (mounted) setSongs(all);
@@ -112,11 +116,15 @@ export default function SongsScreen() {
               isFavorite={id => fav.isFavorite(id)}
               onToggleFavorite={id => fav.toggleFavorite(id)}
               onDelete={fetchSongs}
+              refreshing={refreshing}
+              onRefresh={handleRefresh}
             />
           ) : (
             <ArtistsAccordion
               items={artistGroupsFiltered}
               onPressSong={song => router.push(`/song/${song.id}` as any)}
+              refreshing={refreshing}
+              onRefresh={handleRefresh}
             />
           )}
         </ThemedView>

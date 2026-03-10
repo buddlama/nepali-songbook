@@ -1,6 +1,7 @@
-import { MOCKED_SEARCH_SCREEN_DATA } from "@/constants/dummy-responses";
-import { db } from "@/database";
-import { userSongsTable } from "@/database/schema";
+import bundledSongs from "@/assets/data/songs.json";
+import type { Song } from "@/types/song";
+import { db } from ".";
+import { userSongsTable } from "./schema";
 
 type SeedSong = {
   id: string;
@@ -8,32 +9,36 @@ type SeedSong = {
   artist: string;
   tags?: string[];
   lines?: string[];
+  key?: string | null;
+  capo?: number | null;
 };
 
-// Map mocked search items into minimal seedable songs.
-export const seedSongs: SeedSong[] = MOCKED_SEARCH_SCREEN_DATA.map(item => ({
-  id: item.id,
-  title: item.title,
-  artist: item.artist || item.source.site,
-  tags: [item.source.site.replace(/^www\./, "")],
-  lines: [`[C]Sample line for ${item.title}`, `[G]Replace with imported content later`],
+// Map bundled songs from songs.json into seedable format
+export const seedSongs: SeedSong[] = bundledSongs.map((song: Song) => ({
+  id: song.id,
+  title: song.title,
+  artist: song.artist,
+  tags: song.tags,
+  lines: song.lines,
+  key: song.key || null,
+  capo: song.capo || 0,
 }));
 
 export async function runSeeds() {
-  // Insert seed songs if not already present
+  // Insert seed songs from songs.json
   for (const s of seedSongs) {
     try {
       await db.insert(userSongsTable).values({
         id: s.id,
         title: s.title,
         artist: s.artist,
-        key: null as any,
-        capo: null as any,
+        key: s.key || null,
+        capo: s.capo || 0,
         bpm: null as any,
         tags: (s.tags ?? []).join(","),
         lines: (s.lines ?? []).join("\n"),
       } as any);
-    } catch (e) {
+    } catch {
       // ignore duplicates or insert errors in seed
     }
   }

@@ -45,10 +45,7 @@
     "tags": ["pop", "dance", "nepali"],
     "key": "Am",
     "capo": 0,
-    "lines": [
-      "[Am]Kutu ma kutu [G]supari dana",
-      "[F]Chiya ma chiya [E]ilam ko bana"
-    ]
+    "lines": ["[Am]Kutu ma kutu [G]supari dana", "[F]Chiya ma chiya [E]ilam ko bana"]
   },
   {
     "id": "s5",
@@ -69,10 +66,7 @@
     "tags": ["pop", "classic", "nepali"],
     "key": "C",
     "capo": 0,
-    "lines": [
-      "[C]Aaudai jadai ghar tero bato ma [Am]",
-      "[F]Udi rahane mutu ko chari [G]le"
-    ]
+    "lines": ["[C]Aaudai jadai ghar tero bato ma [Am]", "[F]Udi rahane mutu ko chari [G]le"]
   },
   {
     "id": "s7",
@@ -81,10 +75,7 @@
     "tags": ["folk", "dohori", "nepali"],
     "key": "D",
     "capo": 0,
-    "lines": [
-      "[D]Fauji bhai lai [G]chithi lekhchu",
-      "[A]Yaad garera [D]mero manle"
-    ]
+    "lines": ["[D]Fauji bhai lai [G]chithi lekhchu", "[A]Yaad garera [D]mero manle"]
   },
   {
     "id": "s8",
@@ -111,10 +102,7 @@
     "tags": ["indie", "romance", "nepali"],
     "key": "E",
     "capo": 2,
-    "lines": [
-      "[E]Mayalu timilai [A]mukhamai herchu",
-      "[B]Sapana ma pani [E]chitrai parchu"
-    ]
+    "lines": ["[E]Mayalu timilai [A]mukhamai herchu", "[B]Sapana ma pani [E]chitrai parchu"]
   },
   {
     "id": "s11",
@@ -123,10 +111,7 @@
     "tags": ["classic", "spiritual", "nepali"],
     "key": "C",
     "capo": 0,
-    "lines": [
-      "[C]Fulko aankha ma [F]fulai sansara",
-      "[G]Dukhai ko samjhana [C]birsera jau"
-    ]
+    "lines": ["[C]Fulko aankha ma [F]fulai sansara", "[G]Dukhai ko samjhana [C]birsera jau"]
   },
   {
     "id": "s12",
@@ -135,9 +120,441 @@
     "tags": ["rock", "classic", "nepali"],
     "key": "Am",
     "capo": 0,
+    "lines": ["[Am]Samjhana birsana [G]kati sahyo", "[F]Man bhitra dukha [E]luki rahyo"]
+  },
+  {
+    "id": "s13",
+    "title": "Timi Bhane",
+    "artist": "Sajjan Raj Vaidya",
+    "tags": ["indie", "romance", "nepali"],
+    "key": "G",
+    "capo": 0,
+    "lines": ["[G]Timi bhane mero [Em]maya garyo bhane", "[C]Ma pani timi lai [D]maya garchu"]
+  },
+  {
+    "id": "s14",
+    "title": "Bhai Bhai",
+    "artist": "Nepathya",
+    "tags": ["rock", "band", "nepali"],
+    "key": "D",
+    "capo": 0,
+    "lines": ["[D]Bhai bhai [G]chaina aru sathi", "[A]Yo jiwan ma [D]timi mero sathi"]
+  },
+  {
+    "id": "s15",
+    "title": "Teej Ko Geet",
+    "artist": "Traditional",
+    "tags": ["folk", "festival", "nepali"],
+    "key": "C",
+    "capo": 0,
+    "lines": ["[C]Teej aayo [F]teej aayo", "[G]Ramro teej [C]aayo"]
+  },
+  {
+    "id": "s16",
+    "title": "Galbandi",
+    "artist": "1974 AD",
+    "tags": ["rock", "band", "nepali"],
+    "key": "Em",
+    "capo": 0,
+    "lines": ["[Em]Galbandi khola [C]parima", "[G]Timro maya ko [D]chhaya ma"]
+  },
+  {
+    "id": "s17",
+    "title": "Maya Ko Dori",
+    "artist": "Sugam Pokharel",
+    "tags": ["pop", "ballad", "nepali"],
+    "key": "G",
+    "capo": 0,
+    "lines": ["[G]Maya ko dori [C]le badhera", "[D]Timi ra ma [G]hamesa sangai"]
+  },
+  {
+    "id": "s18",
+    "title": "Jhilke",
+    "artist": "Bartika Eam Rai",
+    "tags": ["indie", "modern", "nepali"],
+    "key": "Am",
+    "capo": 2,
+    "lines": ["[Am]Jhilke jhilke [G]tara haru", "[F]Timro aankha [E]ma bascha"]
+  },
+  {
+    "id": "s19",
+    "title": "Mann Chyangba",
+    "artist": "Bipul Chettri",
+    "tags": ["indie", "folk", "nepali"],
+    "key": "D",
+    "capo": 0,
+    "lines": ["[D]Mann chyangba [G]chyangba", "[A]Pirati ko [D]aakha bata"]
+  },
+  {
+    "id": "s20",
+    "title": "Asaar",
+    "artist": "Bipul Chettri",
+    "tags": ["indie", "folk", "nepali"],
+    "key": "Em",
+    "capo": 0,
+    "lines": ["[Em]Asaar ko jhari [C]le", "[G]Bhijayeko [D]yo manma"]
+  },
+  {
+    "id": "s21",
+    "title": "Euta Manche Ko Maya Le",
+    "artist": "Narayan Gopal",
+    "tags": ["classic", "evergreen", "nepali"],
+    "key": "C",
+    "capo": 0,
+    "lines": ["[C]Euta manche ko [F]maya le lai [G]", "[Am]Kati pani [F]jeevan [G]hariyali"]
+  },
+  {
+    "id": "s22",
+    "title": "Kehi Mitho Baat Gara",
+    "artist": "Narayan Gopal",
+    "tags": ["classic", "evergreen", "nepali"],
+    "key": "G",
+    "capo": 0,
+    "lines": ["[G]Kehi mitho baat [Em]gara na", "[C]Mero mutu lai [D]sukha de"]
+  },
+  {
+    "id": "s23",
+    "title": "Chiso Chiso Hawama",
+    "artist": "Nabin K Bhattarai",
+    "tags": ["pop", "romantic", "nepali"],
+    "key": "D",
+    "capo": 0,
+    "lines": ["[D]Chiso chiso hawa [G]ma", "[A]Timi sanga hidna [D]man lagyo"]
+  },
+  {
+    "id": "s24",
+    "title": "Samjhine Mutu",
+    "artist": "The Edge Band",
+    "tags": ["rock", "classic", "nepali"],
+    "key": "Am",
+    "capo": 0,
+    "lines": ["[Am]Samjhine mutu [G]lai", "[F]Birsana sakina [E]mero maya"]
+  },
+  {
+    "id": "s25",
+    "title": "Lahana Le Jurayo Malai",
+    "artist": "Swoopna Suman",
+    "tags": ["pop", "dance", "nepali"],
+    "key": "C",
+    "capo": 0,
+    "lines": ["[C]Lahana le jurayo [F]malai", "[G]Timro maya le [C]bhulayo malai"]
+  },
+  {
+    "id": "s26",
+    "title": "Gaayo Ghar",
+    "artist": "Nepathya",
+    "tags": ["rock", "band", "nepali"],
+    "key": "G",
+    "capo": 0,
+    "lines": ["[G]Gaayo ghar gaayo [C]ghar", "[D]Phirta gaayo [G]ghar"]
+  },
+  {
+    "id": "s27",
+    "title": "Behos",
+    "artist": "VTEN",
+    "tags": ["hiphop", "rap", "nepali"],
+    "key": "Dm",
+    "capo": 0,
+    "lines": ["[Dm]Behos behos [C]bhayo ma", "[Bb]Timro maya [A]ma pagal"]
+  },
+  {
+    "id": "s28",
+    "title": "Halkara",
+    "artist": "Albatross",
+    "tags": ["rock", "band", "nepali"],
+    "key": "Em",
+    "capo": 0,
+    "lines": ["[Em]Halkara sunna [C]aayeko", "[G]Timi mero [D]gauma"]
+  },
+  {
+    "id": "s29",
+    "title": "Sayaun Thunga Phulka",
+    "artist": "National Anthem",
+    "tags": ["anthem", "national", "nepali"],
+    "key": "G",
+    "capo": 0,
     "lines": [
-      "[Am]Samjhana birsana [G]kati sahyo",
-      "[F]Man bhitra dukha [E]luki rahyo"
+      "[G]Sayaun thunga phulka [C]hami [D]eutai [G]mala nepali",
+      "[C]Sarvabhaum bhai [G]failiyeka [Am]Mechi Mahakali [D]"
     ]
+  },
+  {
+    "id": "s30",
+    "title": "Pahilo Junima",
+    "artist": "Neetesh Jung Kunwar",
+    "tags": ["indie", "romantic", "nepali"],
+    "key": "C",
+    "capo": 0,
+    "lines": ["[C]Pahilo junima [F]bheteko", "[G]Timi lai maya [C]lagyo malai"]
+  },
+  {
+    "id": "s31",
+    "title": "Kohi Kohi Dherai",
+    "artist": "Neetesh Jung Kunwar",
+    "tags": ["indie", "romantic", "nepali"],
+    "key": "G",
+    "capo": 2,
+    "lines": ["[G]Kohi kohi dherai [Em]ramro", "[C]Tara timi sabai [D]bhanda ramro"]
+  },
+  {
+    "id": "s32",
+    "title": "Syndicate",
+    "artist": "1974 AD",
+    "tags": ["rock", "band", "nepali"],
+    "key": "Am",
+    "capo": 0,
+    "lines": ["[Am]Syndicate ma [G]jau na", "[F]Sangai ramro [E]samaya bitau"]
+  },
+  {
+    "id": "s33",
+    "title": "Mero Desh",
+    "artist": "Bhakta Raj Acharya",
+    "tags": ["classic", "patriotic", "nepali"],
+    "key": "D",
+    "capo": 0,
+    "lines": ["[D]Mero desh [G]mero desh", "[A]Hariyali desh [D]nepal"]
+  },
+  {
+    "id": "s34",
+    "title": "Dashain Aayo",
+    "artist": "Traditional",
+    "tags": ["folk", "festival", "nepali"],
+    "key": "C",
+    "capo": 0,
+    "lines": ["[C]Dashain aayo [F]dashain aayo", "[G]Khusi ko mosom [C]dashain aayo"]
+  },
+  {
+    "id": "s35",
+    "title": "Phutung",
+    "artist": "Albatross",
+    "tags": ["rock", "band", "nepali"],
+    "key": "Dm",
+    "capo": 0,
+    "lines": ["[Dm]Phutung phutung [C]udyo", "[Bb]Sapana ko jasto [A]bhayo"]
+  },
+  {
+    "id": "s36",
+    "title": "Gauri",
+    "artist": "Bipul Chettri",
+    "tags": ["indie", "folk", "nepali"],
+    "key": "Em",
+    "capo": 0,
+    "lines": ["[Em]Gauri ko roop [C]ma", "[G]Timi aayeka [D]chhau"]
+  },
+  {
+    "id": "s37",
+    "title": "Saili",
+    "artist": "Bartika Eam Rai",
+    "tags": ["indie", "modern", "nepali"],
+    "key": "G",
+    "capo": 0,
+    "lines": ["[G]Saili saili [Em]mero saili", "[C]Timi sangai [D]bitayo sapana"]
+  },
+  {
+    "id": "s38",
+    "title": "Pir",
+    "artist": "Yama Buddha",
+    "tags": ["hiphop", "rap", "nepali"],
+    "key": "Am",
+    "capo": 0,
+    "lines": ["[Am]Pir mero [G]dil ma", "[F]Timi bina [E]jeevan naramro"]
+  },
+  {
+    "id": "s39",
+    "title": "Chahana",
+    "artist": "Sabin Rai",
+    "tags": ["pop", "romantic", "nepali"],
+    "key": "C",
+    "capo": 0,
+    "lines": ["[C]Chahana ko [F]yatra ma", "[G]Timi sangai [C]hidchu ma"]
+  },
+  {
+    "id": "s40",
+    "title": "Rato Ra Chandra Surya",
+    "artist": "Girish Khatiwada",
+    "tags": ["pop", "patriotic", "nepali"],
+    "key": "G",
+    "capo": 0,
+    "lines": ["[G]Rato ra chandra [D]surya", "[C]Jangi samma [G]ladne"]
+  },
+  {
+    "id": "s41",
+    "title": "Nepali",
+    "artist": "1974 AD",
+    "tags": ["rock", "patriotic", "nepali"],
+    "key": "E",
+    "capo": 0,
+    "lines": ["[E]Nepali nepali [B]ho ma", "[A]Gorkhali nepali [E]ho ma"]
+  },
+  {
+    "id": "s42",
+    "title": "Aba Malai Chhodyera",
+    "artist": "Ciney Gurung",
+    "tags": ["pop", "ballad", "nepali"],
+    "key": "D",
+    "capo": 0,
+    "lines": ["[D]Aba malai chhodyera [G]najau", "[A]Sangai basna [D]deu na"]
+  },
+  {
+    "id": "s43",
+    "title": "Pahilo Prem",
+    "artist": "Astha Raut",
+    "tags": ["pop", "romantic", "nepali"],
+    "key": "C",
+    "capo": 2,
+    "lines": ["[C]Pahilo prem [F]mero", "[G]Timi nai [C]ho mero jiwan"]
+  },
+  {
+    "id": "s44",
+    "title": "Kanchhi Matyang Tyang",
+    "artist": "Traditional",
+    "tags": ["folk", "classic", "nepali"],
+    "key": "G",
+    "capo": 0,
+    "lines": ["[G]Kanchhi matyang tyang [C]la lu la lu", "[D]Aama lai dhoka [G]dinda"]
+  },
+  {
+    "id": "s45",
+    "title": "Hidne Manchhe",
+    "artist": "Nepathya",
+    "tags": ["rock", "band", "nepali"],
+    "key": "Am",
+    "capo": 0,
+    "lines": ["[Am]Hidne manchhe [G]pani", "[F]Runa lai [E]paucha"]
+  },
+  {
+    "id": "s46",
+    "title": "Nachana Harayau",
+    "artist": "Prakash Saput",
+    "tags": ["folk", "dohori", "nepali"],
+    "key": "D",
+    "capo": 0,
+    "lines": ["[D]Nachana harayau [G]kanchhi", "[A]Mero sangai [D]nacha na"]
+  },
+  {
+    "id": "s47",
+    "title": "Balidana",
+    "artist": "Nabin K Bhattarai",
+    "tags": ["pop", "emotional", "nepali"],
+    "key": "Em",
+    "capo": 0,
+    "lines": ["[Em]Balidana [C]dinu paryo", "[G]Maya ko lagi [D]sabai"]
+  },
+  {
+    "id": "s48",
+    "title": "Rodhi Ghar",
+    "artist": "Traditional",
+    "tags": ["folk", "cultural", "nepali"],
+    "key": "C",
+    "capo": 0,
+    "lines": ["[C]Rodhi ghar ma [F]jau", "[G]Sangai nacha [C]gaau"]
+  },
+  {
+    "id": "s49",
+    "title": "Khali Khali",
+    "artist": "VTEN",
+    "tags": ["hiphop", "rap", "nepali"],
+    "key": "Em",
+    "capo": 0,
+    "lines": ["[Em]Khali khali [D]lagcha", "[C]Timi bina yo [B]jiwan"]
+  },
+  {
+    "id": "s50",
+    "title": "Aavash",
+    "artist": "Sajjan Raj Vaidya",
+    "tags": ["indie", "modern", "nepali"],
+    "key": "Am",
+    "capo": 0,
+    "lines": ["[Am]Aavash pani [G]chahincha", "[F]Sangai basna [E]chahincha"]
+  },
+  {
+    "id": "s51",
+    "title": "Bulletproof",
+    "artist": "1974 AD",
+    "tags": ["rock", "band", "nepali"],
+    "key": "D",
+    "capo": 0,
+    "lines": ["[D]Bulletproof [G]bhayera", "[A]Ladna sakchu [D]ma"]
+  },
+  {
+    "id": "s52",
+    "title": "Hijo Aaja Ko Kura",
+    "artist": "Kutumba",
+    "tags": ["instrumental", "folk", "nepali"],
+    "key": "G",
+    "capo": 0,
+    "lines": ["[G]Hijo aaja ko [C]kura", "[D]Samjhera herne [G]bela"]
+  },
+  {
+    "id": "s53",
+    "title": "Farki Farki",
+    "artist": "Sabin Rai",
+    "tags": ["pop", "romantic", "nepali"],
+    "key": "C",
+    "capo": 0,
+    "lines": ["[C]Farki farki [F]herchu", "[G]Timi lai ma [C]samjhera"]
+  },
+  {
+    "id": "s54",
+    "title": "Yo Samjhine Man",
+    "artist": "Neetesh Jung Kunwar",
+    "tags": ["indie", "romantic", "nepali"],
+    "key": "D",
+    "capo": 2,
+    "lines": ["[D]Yo samjhine man [G]lai", "[A]Ke garne [D]bhana"]
+  },
+  {
+    "id": "s55",
+    "title": "Deusi Bhailo",
+    "artist": "Traditional",
+    "tags": ["folk", "festival", "nepali"],
+    "key": "C",
+    "capo": 0,
+    "lines": ["[C]Deusi re [F]bhailo re", "[G]Ghar ghar [C]gaau"]
+  },
+  {
+    "id": "s56",
+    "title": "Timro Jaal Ma",
+    "artist": "Ciney Gurung",
+    "tags": ["pop", "romantic", "nepali"],
+    "key": "G",
+    "capo": 0,
+    "lines": ["[G]Timro jaal ma [Em]phaseko", "[C]Ma yo mutu [D]harayeko"]
+  },
+  {
+    "id": "s57",
+    "title": "Samjhera Timro",
+    "artist": "The Edge Band",
+    "tags": ["rock", "ballad", "nepali"],
+    "key": "Am",
+    "capo": 0,
+    "lines": ["[Am]Samjhera timro [G]maya", "[F]Runu aaucha [E]malai"]
+  },
+  {
+    "id": "s58",
+    "title": "Saanghuro Bato",
+    "artist": "Nepathya",
+    "tags": ["rock", "band", "nepali"],
+    "key": "Em",
+    "capo": 0,
+    "lines": ["[Em]Saanghuro bato [C]ma", "[G]Hida hida [D]janu parcha"]
+  },
+  {
+    "id": "s59",
+    "title": "Bistarai Bistarai",
+    "artist": "Bartika Eam Rai",
+    "tags": ["indie", "modern", "nepali"],
+    "key": "C",
+    "capo": 2,
+    "lines": ["[C]Bistarai bistarai [F]aau na", "[G]Mero jiwan [C]ma"]
+  },
+  {
+    "id": "s60",
+    "title": "Chekyo Chekyo",
+    "artist": "Jems Pradhan",
+    "tags": ["pop", "dance", "nepali"],
+    "key": "D",
+    "capo": 0,
+    "lines": ["[D]Chekyo chekyo [G]maya", "[A]Timro mero [D]prem katha"]
   }
 ]

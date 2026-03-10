@@ -1,9 +1,10 @@
 import { SongItem } from "@/components/song-item";
 import { Spacer } from "@/components/ui/layout/spacer";
 import { UiText } from "@/components/ui/Text";
+import { useThemeColor } from "@/hooks/use-theme-color";
 import type { Song } from "@/types/song";
 import React from "react";
-import { FlatList, View } from "react-native";
+import { FlatList, RefreshControl, View } from "react-native";
 
 export type SongListProps = {
   songs: Song[];
@@ -11,6 +12,8 @@ export type SongListProps = {
   isFavorite?: (id: string) => boolean;
   onToggleFavorite?: (id: string, next: boolean) => void;
   onDelete?: (song: Song) => void;
+  refreshing?: boolean;
+  onRefresh?: () => void;
 };
 
 export function SongList({
@@ -19,7 +22,10 @@ export function SongList({
   isFavorite,
   onToggleFavorite,
   onDelete,
+  refreshing = false,
+  onRefresh,
 }: SongListProps) {
+  const tintColor = useThemeColor({}, "tint");
   if (!songs || songs.length === 0) {
     return (
       <View style={{ padding: 16 }}>
@@ -43,6 +49,16 @@ export function SongList({
         />
       )}
       contentContainerStyle={{ paddingVertical: 8, paddingBottom: 100 }}
+      refreshControl={
+        onRefresh ? (
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            tintColor={tintColor}
+            colors={[tintColor]}
+          />
+        ) : undefined
+      }
     />
   );
 }

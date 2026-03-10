@@ -23,12 +23,12 @@ export default function TabLayout() {
       sfIcon: { default: "music.note", selected: "music.note.list" },
       iconSymbol: "music.note.list" as const,
     },
-    {
-      name: "index" as const,
-      title: "Search",
-      sfIcon: { default: "magnifyingglass", selected: "magnifyingglass" },
-      iconSymbol: "magnifyingglass" as const,
-    },
+    // {
+    //   name: "index" as const,
+    //   title: "Search",
+    //   sfIcon: { default: "magnifyingglass", selected: "magnifyingglass" },
+    //   iconSymbol: "magnifyingglass" as const,
+    // },
     {
       name: "favorites" as const,
       title: "Favorites",
@@ -42,10 +42,10 @@ export default function TabLayout() {
       iconSymbol: "square.and.pencil" as const,
     },
     {
-      name: "db" as const,
-      title: "DB",
-      sfIcon: { default: "list.bullet.rectangle", selected: "list.bullet.rectangle" },
-      iconSymbol: "list.bullet.rectangle" as const,
+      name: "setting" as const,
+      title: "Settings",
+      sfIcon: { default: "gear", selected: "gear" },
+      iconSymbol: "gear" as const,
     },
   ] as const;
   if (isVersion26) {
