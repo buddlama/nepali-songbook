@@ -62,6 +62,32 @@ The Digital Songbook focuses on local reliability, privacy, and simplicity. All 
 
 ---
 
+## 🗺️ Roadmap — Later Phases
+
+Planned expansions after the Phase 1 MVP:
+
+- **Web App**
+  - Browser-based access to the songbook
+  - Sync-friendly experience for desktop users
+
+- **Tab Reader**
+  - Dedicated guitar tablature viewing and editing
+  - Better support for riffs, solos, and instrument-specific notation
+
+- **Tuner**
+  - Built-in guitar tuner for practice and rehearsal
+  - Simple, fast access from inside the app
+
+- **Guitar Music Theory Section**
+  - Chord diagrams, scales, intervals, and progression basics
+  - Educational reference for players learning songs
+
+- **Additional Music Tools**
+  - Other practice utilities as the app evolves
+  - Kept separate from the core offline songbook flow
+
+---
+
 ## 🔒 Architectural & Security Principles
 
 | Principle                  | Description                                                                        |
