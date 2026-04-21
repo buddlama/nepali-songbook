@@ -66,23 +66,57 @@ The Digital Songbook focuses on local reliability, privacy, and simplicity. All 
 
 Planned expansions after the Phase 1 MVP:
 
-- **Web App**
+### 1. Multi-Device Private Sync
+
+- **Seamless Continuity**
+  - Sync your personal library across iPhone, iPad, and Android devices in near real-time.
+
+- **Local-First Architecture**
+  - The app remains fully functional offline using SQLite.
+  - Sync runs automatically in the background when internet is available.
+
+- **End-to-End Isolation**
+  - Data is linked to each user's private account.
+  - No other users can see, search, or access your songbook.
+
+### 2. Smart Web Importer (In-App Browser)
+
+- **Direct Capture**
+  - Browse chord sites inside an integrated mini-browser.
+
+- **One-Tap Import**
+  - Use a Capture action to pull selected song text directly into the local editor.
+
+- **Auto-Formatting**
+  - The app detects chord patterns and converts imported text into the native song format.
+
+### 3. Web App
+
+- **Browser Access**
   - Browser-based access to the songbook
   - Sync-friendly experience for desktop users
 
-- **Tab Reader**
+### 4. Tab Reader
+
+- **Tablature Tools**
   - Dedicated guitar tablature viewing and editing
   - Better support for riffs, solos, and instrument-specific notation
 
-- **Tuner**
+### 5. Tuner
+
+- **Built-In Instrument Tuner**
   - Built-in guitar tuner for practice and rehearsal
   - Simple, fast access from inside the app
 
-- **Guitar Music Theory Section**
+### 6. Guitar Music Theory Section
+
+- **Learning Library**
   - Chord diagrams, scales, intervals, and progression basics
   - Educational reference for players learning songs
 
-- **Additional Music Tools**
+### 7. Additional Music Tools
+
+- **Future Utilities**
   - Other practice utilities as the app evolves
   - Kept separate from the core offline songbook flow
 
@@ -90,12 +124,15 @@ Planned expansions after the Phase 1 MVP:
 
 ## 🔒 Architectural & Security Principles
 
-| Principle                  | Description                                                                        |
-| -------------------------- | ---------------------------------------------------------------------------------- |
-| **Utility, Not Publisher** | The app does not provide any copyrighted song data — all content is user-entered.  |
-| **Local-First**            | SQLite powers all primary features; cloud sync is optional.                        |
-| **Security & Privacy**     | Firestore rules enforce `request.auth.uid == userId` access — no internal sharing. |
-| **No External Data**       | The app ships empty and never scrapes or fetches third-party sources.              |
+| Principle                  | Description                                                                                         |
+| -------------------------- | --------------------------------------------------------------------------------------------------- |
+| **Utility, Not Publisher** | The app does not provide any copyrighted song data — all content is user-entered.                   |
+| **User-Owned Content**     | The app acts as a blank notebook; users are responsible for what they import for personal practice. |
+| **Local-First**            | SQLite powers primary features offline; cloud sync is additive and optional.                        |
+| **Data Isolation**         | Cloud storage is protected by strict rules (`auth.uid == song.userId` or equivalent RLS policy).    |
+| **No Global Database**     | There is no public central song library hosted by the app.                                          |
+| **Security & Privacy**     | Access control ensures one user cannot read or modify another user's data.                          |
+| **Transparency**           | Imported songs keep metadata including source URL for user clarity and traceability.                |
 
 ---
 
