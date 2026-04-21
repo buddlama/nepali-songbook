@@ -54,7 +54,7 @@ The Digital Songbook focuses on local reliability, privacy, and simplicity. All 
 
 ### 4. (Optional) Pro Feature — Personal Cloud Sync
 
-- **Private Cloud Backup** using Firebase Auth + Firestore
+- **Private Cloud Backup** using Supabase Auth + Postgres
   - User-authenticated sync
   - Multi-device backup
   - Data isolated per user ID
@@ -122,6 +122,47 @@ Planned expansions after the Phase 1 MVP:
 
 ---
 
+## 🧭 Implementation Plan (Phased)
+
+This plan turns the roadmap into delivery steps with suggested technology and relative complexity.
+
+| Phase       | Scope                                  | Complexity      | Recommended Stack                                                                                               | Key Deliverables                                                          |
+| ----------- | -------------------------------------- | --------------- | --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| **Phase 2** | Multi-Device Private Sync (foundation) | **High**        | Supabase Auth + Postgres (RLS), background sync service, conflict timestamps                                    | Auth, per-user data model, one-way upload sync, secure rules              |
+| **Phase 3** | Bi-directional Offline Sync            | **High**        | Local change queue, sync state table, retry/backoff, last-write-wins or revision-based merge                    | Full offline-first two-way sync, conflict handling, recovery logging      |
+| **Phase 4** | Smart Web Importer                     | **Medium**      | Expo WebBrowser/WebView, HTML/text extractor, chord parser pipeline, source URL metadata                        | In-app browser, capture flow, auto-format import to editor                |
+| **Phase 5** | Web App (read/write library)           | **Medium-High** | Expo Router + React Native Web (same codebase), platform-specific UI where needed, same backend auth/sync layer | Login, song list/editor/viewer, sync parity with mobile using shared code |
+| **Phase 6** | Tab Reader                             | **Medium**      | Monospace tab renderer, token parser for fret/string patterns, optional editor mode                             | Tab display, alignment preservation, basic tab editing                    |
+| **Phase 7** | Tuner                                  | **Medium**      | Microphone input, pitch detection (autocorrelation/YIN), calibration settings                                   | Real-time note detection, target tuning modes, visual accuracy meter      |
+| **Phase 8** | Guitar Music Theory Section            | **Low-Medium**  | Static/local content modules, searchable lesson index, reusable chord/scale diagrams                            | Theory library, chord/scale explorer, progress-friendly learning pages    |
+
+### Delivery Order (Recommended)
+
+1. Build secure auth + user data isolation first.
+2. Ship minimal cloud sync (upload, restore, basic background runs).
+3. Add conflict-aware two-way sync with robust retries.
+4. Introduce Smart Web Importer with source metadata tagging.
+5. Launch Expo Web from the same codebase with responsive layouts.
+6. Add musician tools: tab reader, tuner, and theory.
+
+### Cross-Phase Engineering Requirements
+
+- **Shared data contracts**: Keep song types and validation schemas shared across mobile and web.
+- **Auditability**: Track `sourceUrl`, `importedAt`, and sync metadata on imported/changed records.
+- **Privacy by default**: Enforce row-level ownership checks on every query path.
+- **Background resilience**: Queue sync jobs and retry safely after network/app restarts.
+- **Telemetry (private)**: Capture anonymous error metrics for sync/import reliability only.
+
+### Definition of Done Per Phase
+
+- Security rules are tested with negative cases (cross-user access blocked).
+- Offline behavior works without regressions to local SQLite flows.
+- Data migration scripts are reversible and documented.
+- User-facing flows include loading, retry, and clear error messaging.
+- Release checklist passes on iOS and Android before moving phases.
+
+---
+
 ## 🔒 Architectural & Security Principles
 
 | Principle                  | Description                                                                                         |
@@ -138,14 +179,14 @@ Planned expansions after the Phase 1 MVP:
 
 ## 🛠️ Technology Stack
 
-| Component  | Technology                  | Purpose                          |
-| ---------- | --------------------------- | -------------------------------- |
-| Framework  | React Native (Expo)         | Cross-platform app development   |
-| Language   | TypeScript                  | Maintainability & type safety    |
-| Navigation | React Navigation            | Screen routing (tabs/navigation) |
-| Local Data | expo-sqlite                 | Offline song storage             |
-| Cloud Sync | Firebase (Auth + Firestore) | Optional private backup          |
-| Sharing    | react-native-share          | Native share sheet invocation    |
+| Component  | Technology                        | Purpose                                   |
+| ---------- | --------------------------------- | ----------------------------------------- |
+| Framework  | React Native (Expo + Expo Router) | Single codebase for iOS, Android, and Web |
+| Language   | TypeScript                        | Maintainability & type safety             |
+| Navigation | React Navigation                  | Screen routing (tabs/navigation)          |
+| Local Data | expo-sqlite                       | Offline song storage                      |
+| Cloud Sync | Supabase (Auth + Postgres + RLS)  | Optional private backup                   |
+| Sharing    | react-native-share                | Native share sheet invocation             |
 
 ---
 
