@@ -4,7 +4,7 @@
     "slug": "guitar-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/icons/ios-light.png",
     "scheme": "guitarapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -13,6 +13,11 @@
       "bundleIdentifier": "com.buddhalama.guitar-app",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
+      },
+      "icon": {
+        "dark": "./assets/images/icons/ios-dark.png",
+        "light": "./assets/images/icons/ios-light.png",
+        "tinted": "./assets/images/icons/ios-tinted.png"
       }
     },
     "android": {
@@ -34,11 +39,12 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
+          "image": "./assets/images/icons/splash-icon-light.png",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff",
           "dark": {
+            "image": "./assets/images/icons/splash-icon-dark.png",
             "backgroundColor": "#000000"
           }
         }
