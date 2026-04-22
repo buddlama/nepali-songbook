@@ -5,44 +5,66 @@ import { Button } from "@/components/ui/Button";
 import { VStack } from "@/components/ui/layout";
 import { db } from "@/database";
 import { runSeeds } from "@/database/seed";
+import { useThemeColor } from "@/hooks/use-theme-color";
 import { exportSongsCSV, importSongsCSV } from "@/lib/db";
+import { isSupabaseConfigured, supabase } from "@/lib/supabase";
+import type { Session } from "@supabase/supabase-js";
 import { useMigrations } from "drizzle-orm/expo-sqlite/migrator";
-import { useEffect, useRef, useState } from "react";
-import { ScrollView, TextInput, View } from "react-native";
+import { useEffect, useState } from "react";
+import { Alert, ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { userSongsTable, usersTable } from "../../database/schema";
+import { userSongsTable } from "../../database/schema";
 import migrations from "../../drizzle/migrations";
 
 export default function DatabaseView() {
   const { success, error } = useMigrations(db, migrations);
-  const [items, setItems] = useState<(typeof usersTable.$inferSelect)[] | null>([]);
-  const nameRef = useRef<TextInput>(null);
-  const ageRef = useRef<TextInput>(null);
-  const emailRef = useRef<TextInput>(null);
-  const [userForm, setUserForm] = useState({ name: "", age: "", email: "" });
 
-  // Loading states for each button
   const [exportLoading, setExportLoading] = useState(false);
   const [importLoading, setImportLoading] = useState(false);
   const [seedLoading, setSeedLoading] = useState(false);
+  const [authLoading, setAuthLoading] = useState(false);
+  const [session, setSession] = useState<Session | null>(null);
+
+  const text = useThemeColor({}, "text");
 
   useEffect(() => {
     if (!success) return;
-
-    (async () => {
-      // await db.delete(usersTable);
-      // await db.insert(usersTable).values([
-      //   {
-      //     name: "John",
-      //     age: 30,
-      //     email: "john@example.com",
-      //   },
-      // ]);
-      // const users = await db.select().from(usersTable);
-      // Run seed data for user_songs after migrations
-      // await runSeeds();
-    })();
   }, [success]);
+
+  useEffect(() => {
+    if (!isSupabaseConfigured || !supabase) return;
+
+    let mounted = true;
+
+    supabase.auth.getSession().then(({ data }) => {
+      if (mounted) setSession(data.session);
+    });
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, nextSession) => {
+      setSession(nextSession);
+    });
+
+    return () => {
+      mounted = false;
+      subscription.unsubscribe();
+    };
+  }, []);
+
+  async function handleSignOut() {
+    if (!supabase) return;
+
+    setAuthLoading(true);
+    try {
+      const { error: signOutError } = await supabase.auth.signOut();
+      if (signOutError) {
+        Alert.alert("Sign Out Failed", signOutError.message);
+      }
+    } finally {
+      setAuthLoading(false);
+    }
+  }
 
   if (error) {
     return (
@@ -77,24 +99,37 @@ export default function DatabaseView() {
   return (
     <ThemedView style={{ flex: 1 }}>
       <SafeAreaView style={{ flex: 1 }} edges={["top"]}>
-        <ScrollView contentContainerStyle={{ flex: 1 }}>
-          <ThemedView
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              width: "100%",
-              height: "100%",
-              justifyContent: "center",
-            }}
-          >
+        <ScrollView contentContainerStyle={{ padding: 16 }}>
+          <ThemedView style={{ marginBottom: 20 }}>
+            <ThemedText type="title" style={{ marginBottom: 12 }}>
+              Account
+            </ThemedText>
+            {!isSupabaseConfigured ? (
+              <ThemedText>
+                Set EXPO_PUBLIC_SUPABASE_URL and EXPO_PUBLIC_SUPABASE_ANON_KEY in your env to enable
+                auth.
+              </ThemedText>
+            ) : (
+              <VStack space={2}>
+                <ThemedText style={{ color: text as string }}>
+                  {session?.user?.email ? `Signed in as ${session.user.email}` : "Not signed in"}
+                </ThemedText>
+                <Button
+                  title="Sign Out"
+                  onPress={handleSignOut}
+                  loading={authLoading}
+                  disabled={authLoading || !session}
+                  variant="ghost"
+                />
+              </VStack>
+            )}
+          </ThemedView>
+
+          <ThemedView>
+            <ThemedText type="title" style={{ marginBottom: 12 }}>
+              Data Tools
+            </ThemedText>
             <VStack space={2}>
-              {/* <Button
-            title="Export DB"
-            onPress={() => {
-              exportDB();
-            }}
-          /> */}
               <Button
                 title="Export Songs CSV"
                 loading={exportLoading}
@@ -136,14 +171,6 @@ export default function DatabaseView() {
                   }
                 }}
               />
-
-              {/* <Button
-            title="Clear Songs"
-            onPress={e => {
-              e.stopPropagation();
-              clearSongsTable();
-            }}
-          /> */}
             </VStack>
           </ThemedView>
         </ScrollView>

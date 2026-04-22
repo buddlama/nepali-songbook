@@ -9,6 +9,10 @@ declare global {
       EXPO_PUBLIC_GOOGLE_CSE_CX?: string;
       /** Comma-separated list of sites to search (e.g., "example.com,foo.org,bar.net") */
       EXPO_PUBLIC_SEARCH_SITES?: string;
+      /** Supabase project URL (public) */
+      EXPO_PUBLIC_SUPABASE_URL?: string;
+      /** Supabase anon key (public) */
+      EXPO_PUBLIC_SUPABASE_ANON_KEY?: string;
     }
   }
 }
